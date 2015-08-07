@@ -1,0 +1,28 @@
+
+/*Ê×Ò³*/
+.price{font-size:16px;color:red;font-weight:bold}
+.box{background:#fff;}
+.index_tuan_item{float:left;width:25%;height:110px;overflow:hidden;padding:10px 0}
+.index_tuan_item:hover{background:#eee}
+.index_tuan_item .index_tuan_pic{float:left;width:120px;overflow:hidden;height:100px;margin-right:6px;text-align:center;display:table-cell;vertical-align:middle;*line-height:1;}
+.index_tuan_item .index_tuan_pic img{vertical-align:middle;height:100px;max-width:96%}
+.index_tuan_intro{font-size:12px;color:#999}
+.index_tuan_pname{height:36px;overflow:hidden;line-height:18px;margin-bottom:6px;font-size:12px;padding-right:5px;}
+.index_bg{padding:10px;background:#449662;color:#fff;border-radius:5px 5px 0 0;}
+.fr_more{float:right;margin-right:10px}
+
+/*li¶ÔÆë*/
+.li_list{font-size:0;text-align:justify;text-justify:distribute-all-lines;}
+.li_list:after{content:"";height:0;width:100%;display:inline-block;overflow:hidden;}
+.li_list li{display:inline-block;vertical-align:middle;letter-spacing:normal;*display:inline;*zoom:1;}
+
+.index_product_list li{width:24%;margin:5px 0;height:370px;overflow:hidden;border:1px solid #e9e9e9}
+.index_product_list li:hover{border:1px solid #FF4C66 }
+.index_product_list .pic{overflow:hidden;text-align:center;position:relative;height:240px;width:280px;display: table-cell;vertical-align:middle;}
+.index_product_list .pic img{ max-width: 230px;max-height: 230px;vertical-align:middle;text-align:center;}
+.index_product_list .title{font-size:14px;color:#707070;padding:10px 15px 0 15px;height:40px;line-height:20px;overflow:hidden}
+.index_product_list .title a{font-size:14px;color:#707070}
+
+.tuan_list_buy{height:40px;padding:18px 15px}
+.tuan_list_buy .price{font-size:18px}
+.market_price{ text-decoration:line-through}
