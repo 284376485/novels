@@ -16,7 +16,7 @@ class CaijiController extends controller
 	//访问首页获取源码
 	public function actionIndex(){
 			while(1){
-			self::atuo();
+			self::auto();
 			sleep(600);		
 			}
 	}
