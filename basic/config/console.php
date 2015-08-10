@@ -25,14 +25,7 @@ return [
                 ],
             ],
         ],
-
-        'db'=>array(
-                'connectionString' => 'mysql:host=localhost;dbname=test',
-                'emulatePrepare' => true,
-                'username' => 'root',
-                'password' => '',
-                'charset' => 'utf8',
-        ),
+        'db'=> $db,
     ],
     'params' => $params,
 ];

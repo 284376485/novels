@@ -1,12 +1,12 @@
 <?php 
-namespace app\Controllers;
+namespace app\controllers;
 
 use yii\web\Controller;
 use app\models\bookinfo;
 use yii\data\Pagination;
 
 
-class ClassController extends Controller
+class ClassController extends controller
 {
 	/**
 	 * @参数1 $Class

@@ -11,12 +11,10 @@ class HelloController extends Controller
     {
     	while(1)
     	{
-    		slef::Test($mes);
+		echo $msg;
     		sleep(5);
     	}
     }
 
-    public function actionTest($msg){
-    	echo $msg;
-    }
+  
 }

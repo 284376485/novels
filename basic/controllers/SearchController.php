@@ -1,9 +1,9 @@
 <?php
-namespace app\Controllers;
+namespace app\controllers;
 use yii\web\Controller;
 use app\models\bookinfo;
 
-class SearchController extends Controller{
+class SearchController extends controller{
 	public $enableCsrfValidation = false;
 	public function actionIndex(){
 		$keywords = $_GET['keyword'];

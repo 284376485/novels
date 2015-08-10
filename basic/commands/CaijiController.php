@@ -2,12 +2,13 @@
 namespace app\controllers;
 namespace app\commands;
 use yii;
-use yii\web\Controller;
+//use yii\web\Controller;
 use phpQuery;
 use app\models\bookinfo;
 use app\models\TransPinyin;
 use app\models\article;
-include 'phpQuery.php'; 
+include 'phpQuery.php';
+use yii\console\Controller; 
 
 
 class CaijiController extends controller
@@ -16,7 +17,7 @@ class CaijiController extends controller
 	public function actionIndex(){
 		ini_set('memory_limit','-1M');
 		set_time_limit(0);
-		//采集值得买的全部发现列表
+	     
 		$url = "http://www.moksos.com";
 		self::Get_Index_All_Update($url);
 
@@ -76,16 +77,16 @@ class CaijiController extends controller
 					}
 			}else{
 					//插入bookinfo 且插入article 从第一章开始
-					if( self::insert_Book_Info($class,$bookname,$author,$Description,$update_time,$status) )
-							echo '<'.$bookname.'>'.'插入成功'.'<br>';
+					if( self::insert_Book_Info($class,$bookname,$author,$Description,$update_time) )
+							echo '<'.$bookname.'>'.'插入成功'."\n";
 						else
-							echo '<'.$bookname.'>'.'插入失败'.'<br>';
+							echo  '<'.$bookname.'>'.'插入失败'."\n";
 					 self::Get_pic($bookname,$img);
 
 					foreach ($Mulu_All_Link_Array as $key => $value) {
 							$content = self::Get_Content($value);
 							echo self::Inset_New_Article($bookname,$Mulu_All_Title[$key],$content);
-							ob_flush();
+						//	ob_flush();
 							flush();
 					}
 					
@@ -97,7 +98,7 @@ class CaijiController extends controller
 				// }
 				// self::Get_Content($bookname,$Mulu_All_Link_Array);
 				//self::Get_Content($bookname,$Mulu_All_Link_Array);
-				ob_flush();
+				//ob_flush();
 				flush();
 				unset($Mulu_All_Title);
 				unset($Mulu_All_Link_Array);
@@ -130,7 +131,7 @@ class CaijiController extends controller
 	}
 
 	//插入新书
-	public function insert_Book_Info($class,$bookname,$author,$Description,$update_time,$status){
+	public function insert_Book_Info($class,$bookname,$author,$Description,$update_time){
 			$bookinfo = new bookinfo();
 			$Pinyin   = new TransPinyin();
 			$bookname_pinyin = $Pinyin->Pinyin($bookname);
@@ -145,7 +146,7 @@ class CaijiController extends controller
 								    'updatetime' => $update_time,
 								    'status' => $status,
 								])->execute();
-			echo '先插入bookinfo'.'<br>';
+			//echo '插入bookinfo'.'<br>';
 			return $return_status;
 	}
 	//插入章节
@@ -171,11 +172,11 @@ class CaijiController extends controller
 
 		//创建目录且写入文本
 		self::mkdir_and_write($bookname_pinyin,$Get_Article_Last_Id,$content);
-		echo '写入路径->novel_directory/'.$bookname_pinyin.'/'.$Get_Article_Last_Id.'.txt<br>';
+		echo  '写入路径->novel_directory/'.$bookname_pinyin.'/'.$Get_Article_Last_Id.'.txt'."\n";
 		//更新bookinfo信息
 		$return_status = self::Update_Book_Info($bookid,$Get_Article_Last_Id,$article_title);
 			if($return_status)
-				echo '更新info信息成功->《'.$bookname.'》最新章节->'.$article_title.'<br>';
+				echo '更新info信息成功->《'.$bookname.'》最新章节->'.$article_title."\n";
 		// exit;
 	}	
 
@@ -192,6 +193,10 @@ class CaijiController extends controller
 				}
 			}
 			unset($Class);
+			if(empty($class)){
+				$class = 'nvpin';
+			}
+
 		return $class;
 	}
 	//判断状态 return 1 连载 0 完结
@@ -213,8 +218,8 @@ class CaijiController extends controller
 	}
 
 	public function mkdir_and_write($bookname_pinyin,$id,$content){
-		$path = 'novel_directory/'.$bookname_pinyin;
-			$res=mkdir(iconv("UTF-8", "GBK", $path),0777,true); 
+		$path = '/home/wwwroot/novels/basic/web/novel_directory/'.$bookname_pinyin;
+				@$res=mkdir(iconv("UTF-8", "GBK", $path),0777,true); 
 
 				$find = strpos($content,'bd-load-s');
 				$content = substr($content,0,$find-1).'<br><br><br>';
@@ -226,6 +231,6 @@ class CaijiController extends controller
 		$img = file_get_contents($url); 
 		$Pinyin = new TransPinyin();
 		$bookname_pinyin = $Pinyin->Pinyin($bookname);
-		file_put_contents('BookImages/'.$bookname_pinyin.'.jpg',$img); 
+		file_put_contents('/home/wwwroot/novels/basic/web/BookImages/'.$bookname_pinyin.'.jpg',$img); 
 	}
 }

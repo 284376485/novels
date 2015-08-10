@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Controllers;
+namespace app\controllers;
 use yii;
 use yii\web\Controller;
 use app\models\bookinfo;
@@ -9,13 +9,13 @@ use app\models\TransPinyin;
 use app\models\IndexModel;
 
 //小说目录
-class DirectoryController extends Controller
+class DirectoryController extends controller
 {
 	public function actionIndex(){
 		$IndexModel = new IndexModel();
 		$memcache=Yii::$app->cache;
 		$now_time = date("i",time());
-		
+				
 
 		$bookname_pinyin = $_GET['bookname'];
 		$article_id = $_GET['article_id'];
@@ -24,7 +24,7 @@ class DirectoryController extends Controller
 				$action = 'index';
 			else 
 				$action = 'content';
-		if($now_time % 10 == 0)
+		if($now_time % 5 == 0)
 			$memcache->delete('Directory_bookinfo_'.$bookname_pinyin);
 
 		if(empty($memcache->get('Directory_bookinfo_'.$bookname_pinyin))){
@@ -41,18 +41,18 @@ class DirectoryController extends Controller
 
 			$memcache->set('Directory_bookinfo_'.$bookname_pinyin,$book_info);
 			$memcache->set('Directory_articleinfo_'.$bookname_pinyin,$article_info);
-			$memcache->set('Directory_articleid_'.$bookname_pinyin,$article_id);
+		//	$memcache->set('Directory_articleid_'.$bookname_pinyin,$article_id);
 		    return $this->render($action,[
 					'bookinfo' => $memcache->get('Directory_bookinfo_'.$bookname_pinyin),
 				 	'article_info' => $memcache->get('Directory_articleinfo_'.$bookname_pinyin),
-				 	'article_id' => $memcache->get('Directory_articleid_'.$bookname_pinyin),
-				]);
+					'article_id'  => $article_id,
+			]);
 		 }
 		 else{
 		 	return $this->render($action,[
 					'bookinfo' => $memcache->get('Directory_bookinfo_'.$bookname_pinyin),
 				 	'article_info' => $memcache->get('Directory_articleinfo_'.$bookname_pinyin),
-				 	'article_id' => $memcache->get('Directory_articleid_'.$article_id)
+				 	'article_id' => $article_id,
 				]);
 		 }
 

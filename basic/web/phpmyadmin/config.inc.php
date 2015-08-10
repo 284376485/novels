@@ -30,7 +30,7 @@ $cfg['Servers'][$i]['verbose'] = 'mysql wampserver';
 //$cfg['Servers'][$i]['auth_type'] = 'cookie';
 $cfg['Servers'][$i]['auth_type'] = 'config';
 $cfg['Servers'][$i]['user'] = 'root';
-$cfg['Servers'][$i]['password'] = '';
+$cfg['Servers'][$i]['password'] = 'zuichudezuichu';
 /* Server parameters */
 $cfg['Servers'][$i]['host'] = '127.0.0.1';
 $cfg['Servers'][$i]['connect_type'] = 'tcp';

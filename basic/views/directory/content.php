@@ -1,25 +1,30 @@
 <!-- 获取章节信息 -->
-<?php 
-foreach ($article_info as $key => $value) {
-	if($article_info[$key]['id'] == $article_id)
+<?php
+foreach($article_info as $key => $value) 
 		{
-			$content_info = $article_info[$key];
-			$pre_id = $key - 1 ;
-			$next_id = $key + 1 ;
-			break;
+			if($article_id == $value['id']){
+				$content_info = $value;			
+				$pre_id = $key - 1 ;
+				$next_id = $key + 1 ;
+				break;
+			}
 		}
-	}
+if($pre_id < 0)
+	$pre_id = 0;
+if($next_id == count($article_info))
+{
+	$next_id -= 1; 
+}	
 //head info
 $this->title = $content_info['article_title'];
-
 //head info end	
-	if($article_info[$pre_id]['id'])
+	if($article_info[$pre_id]['id'] && $pre_id != 0)
 		$pre_link = './'.$article_info[$pre_id]['id'];
 	else
 		$pre_link = './index';
 	
-	
-	if($article_info[$next_id]['id'])
+
+	if($article_info[$next_id]['id'] && $next_id !=( count($article_info) -1 ))
 		$next_link = './'.$article_info[$next_id]['id'];
 	else
 		$next_link = './index';
