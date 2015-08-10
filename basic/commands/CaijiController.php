@@ -15,12 +15,20 @@ class CaijiController extends controller
 {
 	//访问首页获取源码
 	public function actionIndex(){
+			while(1){
+			self::atuo();
+			sleep(600);		
+			}
+	}
+
+	public function auto(){
 		ini_set('memory_limit','-1M');
 		set_time_limit(0);
 	     
 		$url = "http://www.moksos.com";
 		self::Get_Index_All_Update($url);
 
+	
 	}
 
 	public function Get_Index_All_Update($Index_Url){
